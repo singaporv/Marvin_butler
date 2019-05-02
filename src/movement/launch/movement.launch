@@ -1,0 +1,25 @@
+<launch>
+  <arg name="debug" default="false"/>
+
+  <include file="$(find ca_driver)/launch/create_2.launch"/>
+
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch"/>
+
+  <include file="$(find ar_track_alvar)/launch/pr2_indiv_no_kinect.launch"/>
+
+  <node pkg="movement" type="movement_node" name="movement_node" clear_params="true" output="screen">
+    <param name="min_angular" value="0.1"/>
+    <param name="max_angular" value="0.15"/>
+    <param name="min_linear" value="0.1"/>
+    <param name="max_linear" value="0.2"/>
+    <param name="kp_linear" value="1.0"/>
+    <param name="kd_linear" value="0.8"/>
+    <param name="kp_angular" value="1.0"/>
+    <param name="kd_angular" value="0.2"/>
+    <param name="linear_threshold" value="0.4"/>
+    <param name="angular_threshold" value="0.05"/>
+    <param name="angular_threshold_movement" value="3.14"/>
+    <param name="debug" value="$(arg debug)"/>
+  </node>
+
+</launch>
